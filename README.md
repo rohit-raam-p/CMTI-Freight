@@ -61,4 +61,4 @@ python untitled17.py
 
 ## Privacy and configuration
 
-Do not add credentials, private datasets, real shipment records, customer/contact details, or local configuration to this repository. Local environment files, datasets, logs, database files, Python caches, and the known generated plots are excluded by `.gitignore`. No `.env` file is needed.
+Do not add credentials, private datasets, real shipment records, customer/contact details, or local configuration to this repository. Local environment files, datasets, logs, database files, Python caches, and the known generated plots are excluded by `.gitignore`. Python bytecode is excluded because it can retain local filesystem metadata. No `.env` file is needed.
