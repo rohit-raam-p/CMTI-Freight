@@ -1,0 +1,153 @@
+CMTI FREIGHT PROJECT SUMMARY
+
+OVERVIEW
+
+CMTI Freight is an exploratory Python project that demonstrates how synthetic
+freight-shipment sensor readings could be turned into heuristic damage-risk
+scores and inspection flags. It is a small collection of scripts, not a
+deployed freight-management service. The data and decisions are simulated;
+the project does not connect to real freight systems or process real shipment
+records.
+
+WHAT THE PROJECT DOES
+
+1. Generates a repeatable batch of 50 fictional shipments.
+2. Derives two values from simulated sensor readings: a normalized count of
+   high-force events and a fatigue index.
+3. Creates heuristic damage labels and scores, then flags shipments whose
+   score exceeds a threshold.
+4. Prints per-shipment suggested actions and basic classification metrics.
+5. Includes a separate script that draws figures from placeholder error and
+   cost simulations.
+
+The risk score is a hand-written formula with random noise. Although comments
+mention an LSTM, no trained or implemented LSTM model is present. The results
+are examples only and are not validated for operational decisions.
+
+FILES AND MODULES
+
+- cmti_live.py: Generates simulated shipment durations, sensor variability,
+  and peak counts in memory.
+- cmti_proceed.py: Imports the generator, derives features, calculates
+  heuristic scores and labels, applies an inspection threshold, and prints
+  metrics and suggested actions.
+- jounal program.py: Creates six analytical figures using placeholder
+  false-positive and false-negative counts and synthetic costs. The original
+  filename spelling is preserved.
+- untitled17.py: A separate toy hybrid recommendation example using hard-coded
+  ratings and item features. Its relationship to the freight simulation is
+  unknown.
+- requirements.txt: Lists the third-party Python packages.
+- .gitignore: Excludes local configuration, credentials, data files, logs,
+  Python cache/bytecode, and the known generated figures.
+
+TECHNOLOGY
+
+- Python: Programming language used by the scripts.
+- NumPy: Numerical arrays, random-number generation, and mathematical
+  operations.
+- pandas: Tabular data representation and calculations on shipment rows.
+- scikit-learn: Provides classification metrics and cosine similarity.
+- Matplotlib: Produces the figures.
+
+TECHNICAL TERMS
+
+- Synthetic data: Artificially generated example data, not measurements from
+  real shipments.
+- Sensor reading: A simulated measurement intended to represent information
+  such as movement or impact during a trip.
+- Shipment: A fictional freight movement represented by one row in the
+  generated batch.
+- Feature engineering: Transforming raw input values into calculated
+  indicators that a scoring rule can use.
+- High-force peak: A simulated count of force events; this code normalizes the
+  count by trip duration to create a feature.
+- G-force variability / standard deviation: A measure of how much simulated
+  force readings vary. Standard deviation is a common measure of spread.
+- Fatigue index: A calculated illustrative indicator combining force
+  variability and trip duration. It is not a validated engineering measure.
+- Damage label / ground truth: The example's rule-generated answer for whether
+  damage is considered present. It is not confirmed against actual inspection
+  data.
+- Risk score / probability score: A numeric heuristic produced by the script.
+  Despite its probability-style name, it is not a calibrated probability.
+- Threshold: A cutoff used to turn a score into a yes/no flag. In this code,
+  scores above the configured threshold trigger an inspection action.
+- Classification: Assigning an item to a category, here flagged or not
+  flagged for inspection.
+- Confusion matrix: A table comparing predicted categories to the example
+  labels, counting true negatives, false positives, false negatives, and true
+  positives.
+- True positive (TP): A positive example that is also flagged by the rule.
+- True negative (TN): A negative example that is not flagged.
+- False positive (FP): An example flagged even though the generated label is
+  negative.
+- False negative (FN): A positive example that the rule does not flag.
+- Accuracy: The fraction of predictions that match the generated labels.
+- Precision: Among the flagged examples, the fraction with a positive
+  generated label.
+- Recall: Among positive generated labels, the fraction that were flagged.
+- LSTM: Long short-term memory, a type of recurrent neural network sometimes
+  used for sequences. It is mentioned in comments, but is not implemented in
+  this project.
+- Reproducible / deterministic run: A run that can repeat the same random
+  examples when given the same random seed and execution conditions.
+- False-positive/false-negative cost: Placeholder values used in the figure
+  script to illustrate an example cost calculation. They are not sourced from
+  business records.
+- Tail risk: Potentially high costs in the less common, high-cost part of a
+  simulated distribution. The figure script uses generated example values.
+- Cosine similarity: A mathematical measure of how similar two vectors are
+  based on their direction; used by the separate recommendation example.
+- Hybrid recommender: A toy example combining content-based and
+  collaborative recommendation scores.
+- Content-based recommendation: Suggesting items based on item features and a
+  user's calculated profile.
+- Collaborative filtering: Suggesting items using similarities between
+  users' rating patterns.
+- Dependency: An external package that a script imports and requires to run.
+- requirements.txt: A plain-text list that Python's pip installer can use to
+  install project dependencies.
+- Virtual environment: An isolated Python installation for a project, used
+  to keep its packages separate from other Python projects.
+- Environment variable: A setting supplied to a program by its execution
+  environment. The inspected scripts do not require environment variables.
+- Python bytecode / __pycache__: Cached compiled Python files that Python may
+  create while importing or running scripts. These are excluded from Git;
+  bytecode can retain local filesystem metadata.
+- Git: A version-control system that records project file changes and commits.
+- GitHub: A website and service for hosting Git repositories.
+
+INSTALLATION AND EXECUTION
+
+From a PowerShell prompt in the project directory:
+
+    py -m venv .venv
+    .\.venv\Scripts\Activate.ps1
+    python -m pip install -r requirements.txt
+    python cmti_proceed.py
+
+To generate the example figures:
+
+    python "jounal program.py"
+
+To run the unrelated recommender example:
+
+    python untitled17.py
+
+SETUP AND VERIFICATION NOTES
+
+No database, external service, credentials, or .env file is required by the
+inspected scripts. A smoke test could not be completed in the available
+Python 3.14.6 environment: the configured package index did not offer a
+prebuilt NumPy wheel, and building from source failed because Ninja/make was
+unavailable. The project's runtime behavior is therefore not verified in
+that environment. No automated test suite was found.
+
+PRIVACY AND LIMITATIONS
+
+Use synthetic examples only. Do not commit credentials, private datasets,
+customer details, or actual shipment records. Generated figures and Python
+cache/bytecode are excluded from Git. Scores, labels, cost values, and
+suggested actions are illustrative, untrained, and unvalidated; they should
+not be used for freight operations or safety decisions.
